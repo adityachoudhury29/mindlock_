@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Sudoku_AI</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <style>
+            table {
+                margin:1em auto;
+            }
+            td {
+                height:30px;
+                width:30px;
+                border:1px solid;
+                text-align:center;
+            }
+            td:first-child {
+                border-left:solid;
+            }
+            td:nth-child(3n) {
+                border-right:solid ;
+            }
+            tr:first-child {
+                border-top:solid;
+            }
+            tr:nth-child(3n) td {
+                border-bottom:solid ;
+            }
+            input[type="number"] {
+                -moz-appearance: textfield;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body style="background-color: grey;">
+        <div style="background-color: rgb(35,35,35);height: 170px;width: 100%;">
+            <p style="color: white;text-align: center;font-size: 40px;padding-top: 50px;">[M]ind [L]ock</p>
+            <p style="color: white;text-align: center;font-size: 20px;">The AI for Sudoku</p>
+        </div>
+        <br>
+        {% if message %}
+            <p style="color: white;text-align: center;font-size: 20px;">{{message}}</p>
+        {% endif %}
+        <div class="d-flex justify-content-center">
+            <form method="post" action="/submit">
+                <table>
+                    {% for i in "123456789" %}
+                        <tr>
+                            {% for j in "123456789" %}
+                                <td><input style="width: 40px;height: 40px;" type="number" name="cell_{{ i }}{{ j }}" min="0" max="9"></td>
+                            {% endfor %}
+                        </tr>
+                    {% endfor %}
+                </table>
+                <br>
+                <input style="width: 376px;border: black 5px;" class="btn btn-primary" type="submit" value="Submit">
+            </form>
+        </div>
+    </body>
+</html>
