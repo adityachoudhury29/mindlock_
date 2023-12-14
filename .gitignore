@@ -1,2 +1,4 @@
 /sudokuai
 __pycache__
+sudoku.csv
+sudokumodel-gpu-3.h5
