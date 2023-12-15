@@ -1,47 +1,151 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Sudoku_AI</title>
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-        <style>
-            table {
-                margin:1em auto;
-            }
-            td {
-                height:30px;
-                width:30px;
-                border:1px solid;
-                text-align:center;
-            }
-            td:first-child {
-                border-left:solid;
-            }
-            td:nth-child(3n) {
-                border-right:solid ;
-            }
-            tr:first-child {
-                border-top:solid;
-            }
-            tr:nth-child(3n) td {
-                border-bottom:solid ;
-            }
-            input[type="number"] {
-                -moz-appearance: textfield;
-                text-align: center;
-            }
-        </style>
-    </head>
-    <body style="background-color: grey;">
-        <div style="background-color: rgb(35,35,35);height: 170px;width: 100%;">
-            <p style="color: white;text-align: center;font-size: 40px;padding-top: 50px;">[M]ind [L]ock</p>
-            <p style="color: white;text-align: center;font-size: 20px;">The AI for Sudoku</p>
-        </div>
-        <a href="/uploadview" class="d-flex justify-content-center"><button class="btn btn-info" style="margin-top:10px;">Upload a sudoku pic!</button></a>
-        <br>
-        {% if message %}
-            <p style="color: white;text-align: center;font-size: 20px;">{{message}}</p>
-        {% endif %}
-        <div class="d-flex justify-content-center">
+
+<head>
+    <title>Sudoku_AI</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        table {
+            margin: 1em auto;
+        }
+
+        td {
+            height: 30px;
+            width: 30px;
+            border: 1px solid;
+            text-align: center;
+        }
+
+        td:first-child {
+            border-left: solid;
+        }
+
+        td:nth-child(3n) {
+            border-right: solid;
+        }
+
+        tr:first-child {
+            border-top: solid;
+        }
+
+        tr:nth-child(3n) td {
+            border-bottom: solid;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+            text-align: center;
+            appearance: 10;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #AFEEEE;
+            height: 170px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .header h1 {
+            color: white;
+            font-family: Helvetica, sans-serif;
+            font-size: 40px;
+            font-weight: bolder;
+            margin: 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .header h2 {
+            color: black;
+            padding-top: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .upload-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .upload-button {
+            background-color: #90ee90;
+            /* Button background color */
+            color: #000000;
+            /* Button text color */
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .upload-button:hover {
+            background-color: #2980b9;
+            /* Change background color on hover */
+        }
+
+        .d-flex-container {
+            display: flex;
+            justify-content: center;
+            align-items:center;
+            margin-top: 20px;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+
+        td {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            cursor: pointer;
+        }
+        .submit-button {
+            width: 376px;
+            border: 5px solid black;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body style="background-color: #4682b4">
+    <div class="header">
+        <h1>[M]ind [L]ock</h1>
+        <h2>The AI for Sudoku</h2>
+    </div>
+    <div class="upload-button-container">
+        <a href="/uploadview" class="upload-button">Upload a Sudoku Picture</a>
+    </div>
+    <br>
+    {% if message %}
+    <p style="color: white;text-align: center;font-size: 20px; font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;">
+        {{message}}</p>
+    {% endif %}
+    <div class="d-flex justify-content-center">
             {% if board %}
             <form method="post" action="/submit">
                 <table>
@@ -75,9 +179,9 @@
                     {% endfor %}
                 </table>
                 <br>
-                <input style="width: 376px;border: black 5px;" class="btn btn-primary" type="submit" value="Submit">
+                <input style="width: 376px;border: black 5px; color: black; margin-left: 10px;" class="btn btn-success" type="submit" value="Submit">
             </form>
             {% endif %}
         </div>
-    </body>
+</body>
 </html>
