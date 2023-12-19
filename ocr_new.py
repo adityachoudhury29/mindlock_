@@ -14,13 +14,6 @@ def get_perspective(img, location, height = 900, width = 900):
     result = cv2.warpPerspective(img, matrix, (width, height))
     return result
 
-def get_InvPerspective(img, masked_num, location, height = 900, width = 900):
-    pts1 = np.float32([[0, 0], [width, 0], [0, height], [width, height]])
-    pts2 = np.float32([location[0], location[3], location[1], location[2]])
-    matrix = cv2.getPerspectiveTransform(pts1, pts2)
-    result = cv2.warpPerspective(masked_num, matrix, (img.shape[1], img.shape[0]))
-    return result
-
 def find_board(img):
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     bfilter = cv2.bilateralFilter(gray, 13, 20, 20)

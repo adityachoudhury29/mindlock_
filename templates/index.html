@@ -96,7 +96,9 @@
         }
 
         .upload-button:hover {
-            background-color: #2980b9;
+            background-color: #29b97d;
+            text-decoration: none;
+            color: black;
             /* Change background color on hover */
         }
 
@@ -137,6 +139,7 @@
         <h1>[M]ind [L]ock</h1>
         <h2>The AI for Sudoku</h2>
     </div>
+    {% block content %}
     <div class="upload-button-container">
         <a href="/uploadview" class="upload-button">Upload a Sudoku Picture</a>
     </div>
@@ -183,5 +186,6 @@
             </form>
             {% endif %}
         </div>
+    {% endblock %}
 </body>
 </html>
