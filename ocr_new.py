@@ -4,7 +4,6 @@ import imutils
 
 input_size = 48
 
-
 def get_perspective(img, location, height = 900, width = 900):
     pts1 = np.float32([location[0], location[3], location[1], location[2]])
     pts2 = np.float32([[0, 0], [width, 0], [0, height], [width, height]])
@@ -38,5 +37,4 @@ def split_boxes(board):
         for box in cols:
             box = cv2.resize(box, (input_size, input_size))/255.0
             boxes.append(box)
-    cv2.destroyAllWindows()
     return boxes
