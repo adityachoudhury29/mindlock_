@@ -1,12 +1,13 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 from flask import Flask, render_template, request
 import numpy as np
 from tensorflow.keras.models import load_model
 from ocr_new import *
-import os
 
 app=Flask(__name__)
 
-model=load_model('sudokumodel-gpu-3.h5')
+model=load_model('mindlock-model.h5')
 
 @app.route("/")
 def index():
@@ -71,3 +72,5 @@ def sendfile():
     else:
         return render_template('getimage.html',message="No file selected!")
 
+if __name__ == "__main__":
+    app.run(debug=True)
